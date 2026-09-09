@@ -5,6 +5,29 @@ A real-time predictive maintenance dashboard for industrial motors. Streams live
 Built as a final-year project at Thapar Institute of Engineering and Technology.
 
 ---
+## Architecture
+The system is split into four layers so that sensors, transport, and application logic stay decoupled — new motors can be added without changing backend code.
+
+| Layer | Component | Responsibility |
+|---|---|---|
+| Edge | `publisher.py`, `lpf.py` | Sensor data generation and low-pass signal filtering |
+| Transport | MQTT broker, `subscriber.py` | Decoupled message delivery between edge and server |
+| Application | `app.py` | Authentication, telemetry API, ML inference |
+| Presentation | `templates/`, `static/` | Live dashboard rendering and polling |
+
+**Request flow for a telemetry read:**
+
+1. Browser polls `GET /api/telemetry?asset=motor_02`
+2. Flask checks the session cookie — unauthenticated requests get `403`
+3. Asset name validated against a whitelist — anything else gets `400`
+4. Telemetry generated, FFT harmonics computed, RUL predicted
+5. JSON returned and rendered as live charts
+
+---
+
+
+
+
 
 ## Problem
 
@@ -92,3 +115,9 @@ pip install -r requirements.txt
 ```
 
 Create a `.env` file in the project root:
+
+- **Backend:** Python, Flask
+- **ML:** scikit-learn, NumPy
+- **Messaging:** MQTT (publisher/subscriber)
+- **Frontend:** HTML, CSS, JavaScript
+- **Security:** Werkzeug password hashing, python-dotenv
