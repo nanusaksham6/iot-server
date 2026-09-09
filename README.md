@@ -121,3 +121,15 @@ Create a `.env` file in the project root:
 - **Messaging:** MQTT (publisher/subscriber)
 - **Frontend:** HTML, CSS, JavaScript
 - **Security:** Werkzeug password hashing, python-dotenv
+
+
+
+---
+
+## License
+
+Copyright © 2026 Saksham ([@nanusaksham6](https://github.com/nanusaksham6)). All rights reserved.
+
+This is an individual final-year academic project. Unauthorised copying, redistribution, or submission of this work by any other person is prohibited. See [LICENSE](LICENSE) for full terms.
+
+**Canonical repository:** https://github.com/nanusaksham6/iot-server
